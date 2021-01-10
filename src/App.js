@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 
+import { Footer } from "./components/Footer";
+
 // import Jumbotron from "react-bootstrap/Jumbotron";
-import Toast from "react-bootstrap/Toast";
+// import Toast from "react-bootstrap/Toast";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
@@ -9,31 +11,76 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Form from "react-bootstrap/Form";
+import {FormControl} from "react-bootstrap";
+// import { Form, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import Card from 'react-bootstrap/Card'
+
 
 import "./css/App.css";
 
-const ExampleToast = ({ children }) => {
+// const ExampleToast = ({ children }) => {
+//   const [mostrar, toggleShow] = useState(true);
+
+//   return (
+//     <>
+//       {!mostrar && (
+//         <Button className="btn btn-block" onClick={() => toggleShow(true)}>
+//           Mostrar/Ocultar
+//         </Button>
+//       )}
+//       <Toast show={mostrar} onClose={() => toggleShow(false)}>
+//         <Toast.Header>
+//           <strong className="mr-auto">React-Bootstrap</strong>
+//         </Toast.Header>
+//         <Toast.Body>{children}</Toast.Body>
+//       </Toast>
+//     </>
+//   );
+// };
+
+
+
+
+const Ejemplodesaparecer = ({ children }) => {
   const [mostrar, toggleShow] = useState(true);
+  
+  const checkState = () => {
+    // if (mostrar === false) {
+    //   toggleShow(true);
+    // } else {
+    //   toggleShow(false);
+    // }
+    if (mostrar) {
+      toggleShow(false);
+    } else {
+      toggleShow(true);
+    }
+  }
 
   return (
     <>
       {!mostrar && (
-        <Button className="btn btn-block" onClick={() => toggleShow(true)}>
+        <div>
+          {children}
+          {/* <Button variant="outline-primary" className="btn btn-block" onClick={() => toggleShow(true)}>
+            Mostrar/Ocultar
+          </Button> */}
+        </div>
+      )}
+      <div show={mostrar} onClose={() => toggleShow(false)}>
+        {/* <Toast.Body>{children}</Toast.Body> */}
+        {/* <Button variant="outline-primary"className="btn btn-block" onClick={() => toggleShow(false)}> */}
+        <Button variant="outline-primary"className="btn btn-block" onClick={() => checkState()}>
           Mostrar/Ocultar
         </Button>
-      )}
-      <Toast show={mostrar} onClose={() => toggleShow(false)}>
-        <Toast.Header>
-          <strong className="mr-auto">React-Bootstrap</strong>
-        </Toast.Header>
-        <Toast.Body>{children}</Toast.Body>
-      </Toast>
+      </div>
     </>
   );
 };
 
-// var fecha = new Date();
-var anio = new Date().getFullYear()
+
+
+
 export class App extends React.Component {
   frase = {
     mensaje: "Un gran poder requiere una gran responsabilidad",
@@ -46,20 +93,13 @@ export class App extends React.Component {
     return this.personajes.length;
   }
 
-
   render() {
     return (
       <div>
-        {/* <Navbar bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Navbar</Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
-              <Nav.Link href="#features">Features</Nav.Link>
-              <Nav.Link href="#pricing">Pricing</Nav.Link>
-            </Nav>
-          </Navbar> */}
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        {/* <Navbar bg="light" expand="lg"> */}
+        {/* bg="dark" expand="navbar-lg" */}
+        <Navbar bg="dark" variant="dark">
+          <Navbar.Brand href="#home">Navbar</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -80,7 +120,7 @@ export class App extends React.Component {
               </NavDropdown>
             </Nav>
             <Form inline>
-              {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" /> */}
+              <FormControl type="text" placeholder="Search" className="mr-sm-2" />
               <Button variant="outline-success">Search</Button>
             </Form>
           </Navbar.Collapse>
@@ -91,14 +131,58 @@ export class App extends React.Component {
           {/* <Jumbotron> */}
           <br />
           <div className="row">
+
             <div className="col">
               <h1>*ngIf</h1>
               <hr />
-              <ExampleToast>
-                <h5 className="card-tittle"> {this.frase.autor}</h5>
-                <p class="card-text"> {this.frase.mensaje}</p>
-              </ExampleToast>
+              {
+                <Ejemplodesaparecer>
+                  <Card
+                  bg={'primary'}
+                  text={'light'}
+                  // style={{ width: '18rem' }}
+                  className="mb-2"
+                  >
+                    {/* <Card.Header>Header</Card.Header> */}
+                    <Card.Body>
+                      <Card.Title> {this.frase.autor} </Card.Title>
+                      <Card.Text> {this.frase.mensaje} </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Ejemplodesaparecer>
+              }
+
+              {/* {
+                [
+                  'Primary',
+                  'Secondary',
+                  'Success',
+                  'Danger',
+                  'Warning',
+                  'Info',
+                  'Light',
+                  'Dark',
+                ].map((variant, idx) => (
+                  <Card
+                    bg={variant.toLowerCase()}
+                    key={idx}
+                    text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
+                    style={{ width: '18rem' }}
+                    className="mb-2"
+                  >
+                    <Card.Header>Header</Card.Header>
+                    <Card.Body>
+                      <Card.Title>{variant} Card Title </Card.Title>
+                      <Card.Text>
+                        Some quick example text to build on the card title and make up the bulk
+                        of the card's content.
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                ))
+              } */}
             </div>
+
             <div className="col">
               <h1>*ngFor</h1>
               <hr />
@@ -123,16 +207,7 @@ export class App extends React.Component {
           </div>
           {/* </Jumbotron> */}
         </Container>
-        {/* <div className="container"> */}
-          <footer className="footer bg-light text-center">
-            <div className="container">
-              <p>
-                {/* &copy; {{ anio }} Pepito Perez */}
-                &copy; {anio} Pepito Perez
-              </p>
-            </div>
-          </footer>
-        {/* </div> */}
+        <Footer />
       </div>
     );
   }
