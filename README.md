@@ -1,5 +1,7 @@
 # 01-Hola_mundo React
 
+Hello world project wit React.js
+
 A simple [create-react-app](CRA-README.md) setup, showcasing one of the lastest React-Bootstrap components!
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
